@@ -1,0 +1,344 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+  <!-- font awesome 5 free -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <!-- Poppins font from Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+
+
+
+  <title>{{title}}</title>
+</head>
+
+<body>
+
+    <!--Offer Alert ================================ -->
+     <div class="offer-alert">
+       <div class="offer-alert__container container">
+         <span>IONICS <span class="highlight">Plus</span></span>
+       </div>
+     </div>
+
+  <!--Hero ====================================== -->
+  <header class="hero container-fluid border-bottom">
+    <nav class="hero-nav container px-4 px-lg-0 mx-auto">
+      <ul class="nav w-100 list-unstyled align-items-center p-0">
+        <li class="hero-nav__item">
+          <img class="hero-nav__logo" src="{% static 'images/my_logo_2.png' %}">
+        </li>
+
+        {% if user.is_authenticated %}
+
+        <li class="hero-nav__item">
+           <h6 class=" mb-0">Welcome back <span class="highlight">{{user_name}}</span></h6>
+        </li>
+
+        {% else %}
+
+        <li class="hero-nav__item">
+           <h6 class=" mb-0"><span class="highlight"></span></h6>
+        </li>
+
+        {% endif %}
+
+        <li class="flex-grow-1 hero__nav-list hero__nav-list--mobile-menu ft-menu">
+          <ul class="hero__menu-content nav flex-column flex-lg-row ft-menu__slider animated list-unstyled p-2 p-lg-0">
+            <li class="flex-grow-1">
+              <ul class="nav nav--lg-side list-unstyled align-items-center p-0">
+                <li class="hero-nav__item">
+                  <a href="{% url 'logout' %}" class="hero-nav__link">Sign out</a>
+                </li>
+                <li class="hero-nav__item">
+                  <a href="{% url 'addrequestpage' %}" class="hero-nav__link">Adding Request</a>
+                </li>
+                <li class="hero-nav__item">
+                  <a href="{% url 'mainapp' %}" class="hero-nav__link">Main</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="d-lg-none flex-grow-1 d-flex flex-row-reverse hero-nav__item">
+          <button onclick="document.querySelector('#hero-menu').classList.toggle('ft-menu--js-show')"
+            class="text-center px-2">
+            <i class="fas fa-bars"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===================================== -->
+
+  <!-- ===================================== -->
+
+  <!-- ======================================== -->
+  <!-- =================================== -->
+
+  <div id="pricing" class="block-17 px-4 space-between-blocks">
+    <div class="container">
+      <div class="block-17__header col-lg-8 col-xl-7 mx-auto text-center px-0">
+
+        {% if objs %}
+        <h1 class="block__title mb-3">The added Requests</h1>
+        <h4 class="mb-3"><span class="highlight">Details of the added requests with the status..</span></h4>
+        <!--p class="block__paragraph">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s
+          standard
+        </p-->
+        {% else %}
+
+        <h1 class="block__title mb-3">Add the first request</h1>
+        <a href="{% url 'addrequestpage' %}" class="d-block btn btn-primary px-5 mx-auto">Add a request</a>
+
+
+        {% endif  %}
+      </div>
+
+      {% for one_obj in objs %}
+
+      <div class="block-17__card row flex-column-reverse flex-lg-row justify-content-center">
+
+
+
+        <div class=" text-center col-lg-5 px-0 d-flex align-items-center justify-content-center" style="background-color:powderblue;">
+          <div class="px-4 px-lg-5">
+            <img class="person__avatar" src="{% static 'images/my_logo_2.png' %}">
+            <p class="person__name">Subject title: <span class="highlight">{{one_obj.title}}</span></p>
+            <p class="person__name">Subject id: <span class="highlight">{{one_obj.id}}</span></p><hr>
+            <p class="person__name">Created Date: <span class="highlight">{{one_obj.created}}</span></p>
+            <p class="person__name">Delivery Date: <span class="highlight">{{one_obj.delivery_date}}</span></p>
+
+
+            <p class="testimonial-card-3__paragraph my-4">
+
+              {{one_obj.subject}}
+              
+            </p>
+           
+            <!--div class="flex-grow-1 d-flex flex-column mb-3">
+              <span class="person__info my-1">indiehackers.com</span>
+              <span class="person__rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </span>
+            </div-->
+
+          </div>
+          <span class="testimonial-card-3__quote-symbol">
+            <i class="fas fa-quote-left"></i>
+          </span>
+        </div>
+
+
+
+        <div class="cta-card col-lg-5 px-0">
+          <div class="plan-card text-center">
+            <h6 class="plan-card__name mb-0">Request Status</h6>
+
+
+
+            {% if one_obj.in_progress == "True" %}
+            <p class="discount mt-3 mb-0 d-flex align-items-center justify-content-center">
+              <span class="discount__percentage mx-2">The request under revision</span><hr>
+            </p>
+            {% endif %}
+
+
+            {% if one_obj.rejected == "True" %}
+            <p class="discount mt-3 mb-0 d-flex align-items-center justify-content-center">
+              <span class="discount__percentage mx-2">The request is Not Accepted</span><hr>
+
+              <span class="mx-2">We are really sorry to not accept your request, for more information please contact us. </span><hr>
+            {% endif %}
+
+
+
+            {% if one_obj.accepted == "True" %}
+            <p class="discount mt-3 mb-0 d-flex align-items-center justify-content-center">
+              <span class="discount__percentage mx-2">Accepted</span>
+            </p>
+            <h4 class="person__name my-4" >Price: <span  class="highlight">{{one_obj.Price}}</span></h4>
+            <h4 class="person__name">The Solution is on going......</h4>
+            {% endif %}
+
+            
+
+            <ul class="plan-features list-unstyled mt-3 mb-0">
+
+
+              {% if one_obj.finished == "True" and one_obj.solution_file_1 %}
+
+              <p class="discount mt-3 mb-0 d-flex align-items-center justify-content-center">
+              <span class="discount__percentage mx-2">Solution is ready !!!</span><hr>
+              </p>
+
+              <li class="plan-features__li">
+                <span class="plan-features__li-icon mx-1">
+                  <svg class="bi bi-check2-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                    <path fill-rule="evenodd"
+                      d="M8 2.5A5.5 5.5 0 1 0 13.5 8a.5.5 0 0 1 1 0 6.5 6.5 0 1 1-3.25-5.63.5.5 0 1 1-.5.865A5.472 5.472 0 0 0 8 2.5z" />
+                  </svg>
+                </span>
+                <span class="mx-3"><a href='{{ one_obj.solution_file_1.url }}'>{{ one_obj.solution_file_1}}</a></span>
+              </li>
+
+              {% endif %}
+
+
+              {% if one_obj.finished == "True" and one_obj.solution_file_2 %}
+
+              <li class="plan-features__li">
+                <span class="plan-features__li-icon mx-1">
+                  <svg class="bi bi-check2-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                    <path fill-rule="evenodd"
+                      d="M8 2.5A5.5 5.5 0 1 0 13.5 8a.5.5 0 0 1 1 0 6.5 6.5 0 1 1-3.25-5.63.5.5 0 1 1-.5.865A5.472 5.472 0 0 0 8 2.5z" />
+                  </svg>
+                </span>
+                <span class="mx-3"><a href='{{ one_obj.solution_file_2.url }}'>{{ one_obj.solution_file_2}}</a></span>
+              </li>
+
+              {% endif %}
+
+
+              {% if one_obj.finished == "True" and one_obj.solution_file_3 %}
+
+              <li class="plan-features__li">
+                <span class="plan-features__li-icon mx-1">
+                  <svg class="bi bi-check2-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                    <path fill-rule="evenodd"
+                      d="M8 2.5A5.5 5.5 0 1 0 13.5 8a.5.5 0 0 1 1 0 6.5 6.5 0 1 1-3.25-5.63.5.5 0 1 1-.5.865A5.472 5.472 0 0 0 8 2.5z" />
+                  </svg>
+                </span>
+                <span class="mx-3"><a href='{{ one_obj.solution_file_3.url }}'>{{ one_obj.solution_file_3}}</a></span>
+              </li>
+
+              {% endif %}
+
+
+              <li class="mt-5">
+                {% if one_obj.finished == "True" %}
+
+                <h4 class=" text-center person__name my-4" >Price: <span  class="highlight">{{one_obj.Price}}</span></h4>
+                <a href="/payment/{{one_obj.id}}" class="d-block btn btn-primary px-5 mx-auto">
+                  Payment
+                </a>
+
+                
+
+                {% endif %}
+
+                <h4 class="person__name text-center mt-1"><a href="https://api.whatsapp.com/send?phone=96594964095">For any query, please Contact the admin</a></h4>
+              </li>
+
+            </ul>
+
+            
+
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <!-- =================================== -->
+
+  <!-- =================================== -->
+
+  <!-- =================================== -->
+
+  <!-- =================================== -->
+
+  <div class="block-44 py-5">
+    <hr class="block-44__divider">
+    <div class="container">
+      <div class="row flex-column flex-md-row px-2 justify-content-center">
+        <div class="flex-grow-1">
+          <ul class="block-44__extra-links d-flex list-unstyled p-0">
+
+            <li class="mx-2">
+              <a href="https://twitter.com/Elec_Eng_MYehia" class="block-44__link m-0">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+
+            <li class="mx-2">
+              <a href="https://www.instagram.com/electricalelectronics.engineer/" class="block-44__link m-0">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </li>
+
+            <li class="mx-2">
+              <a href="https://www.linkedin.com/in/mohamed-yehia-essa-8971b862/" class="block-44__link m-0">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </li>
+
+            <li class="mx-2">
+              <a href="https://www.facebook.com/PythonDeveloperMohamedYehia" class="block-44__link m-0">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+
+            <li class="mx-2">
+              <a href="https://www.youtube.com/channel/UCPrqqCjhqLyt1FZWWYgH-0Q" class="block-44__link m-0">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+        <p class="block-41__copyrights">&copy; 2021 IONICS Plus. All Rights Reserved.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================== -->
+
+  <script src="{% static 'js/app.js' %}"></script>
+
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,754 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+  <!-- font awesome 5 free -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <!-- Poppins font from Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+
+
+
+  <title>IONICS+ For Engineering Services</title>
+</head>
+
+<body>
+
+    <!--Offer Alert ================================ -->
+     <div class="offer-alert">
+       <div class="offer-alert__container container">
+         <span>IONICS <span class="highlight">Plus</span></span>
+       </div>
+     </div>
+
+  <!--Hero ====================================== -->
+  <header class="hero container-fluid border-bottom">
+    <nav class="hero-nav container px-4 px-lg-0 mx-auto">
+      <ul class="nav w-100 list-unstyled align-items-center p-0">
+        <li class="hero-nav__item">
+          <img class="hero-nav__logo" src="{% static 'images/my_logo_2.png' %}">
+        </li>
+
+        {% if user.is_authenticated %}
+
+        <li class="hero-nav__item">
+           <h6 class=" mb-0">Welcome back <span class="highlight">{{user_name}}</span></h6>
+        </li>
+
+        {% else %}
+
+        <li class="hero-nav__item">
+           <h6 class=" mb-0"><span class="highlight"></span></h6>
+        </li>
+
+        {% endif %}
+
+
+
+        <li id="hero-menu" class="flex-grow-1 hero__nav-list hero__nav-list--mobile-menu ft-menu">
+          <ul class="hero__menu-content nav flex-column flex-lg-row ft-menu__slider animated list-unstyled p-2 p-lg-0">
+            <li class="flex-grow-1">
+              <ul class="nav nav--lg-side list-unstyled align-items-center p-0">
+                <li class="hero-nav__item">
+                  <a href="#contact-us" class="hero-nav__link">Contact Us</a>
+                </li>
+                <li class="hero-nav__item">
+                  <a href="#features" class="hero-nav__link">Courses</a>
+                </li>
+                <li class="hero-nav__item">
+                  <a href="#product" class="hero-nav__link">Experiences</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <button onclick="document.querySelector('#hero-menu').classList.toggle('ft-menu--js-show')"
+            class="ft-menu__close-btn animated">
+            <svg class="bi bi-x" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z"
+                clip-rule="evenodd" />
+              <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z"
+                clip-rule="evenodd" />
+            </svg>
+          </button>
+        </li>
+        <li class="d-lg-none flex-grow-1 d-flex flex-row-reverse hero-nav__item">
+          <button onclick="document.querySelector('#hero-menu').classList.toggle('ft-menu--js-show')"
+            class="text-center px-2">
+            <i class="fas fa-bars"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+    <div class="hero__content container mx-auto">
+      <div class="row px-0 mx-0 align-items-center">
+        <div class="col-lg-6 px-0">
+          <h1 class="hero__title mb-3">
+            IONICS <span class="highlight">Plus</span>
+          </h1>
+          <p class="hero__paragraph mb-5">
+            Experiences in the electrical, electronics and computer engineering... 
+          </p>
+
+          <div class="hero__btns-container">
+            {% if user.is_authenticated %}
+
+            <a class="hero__btn btn btn-primary mb-2 mb-lg-0" href="{% url 'userpage' %}">
+              My page
+            </a>
+
+            {% else %}
+
+            <a class="hero__btn btn btn-primary mb-2 mb-lg-0" href="{% url 'signup' %}">
+              Sign Up
+            </a>
+
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            <a class="hero__btn btn btn-secondary mx-lg-3" href="{% url 'logout' %}">
+              Sign out
+            </a>
+            {% else %}
+            <a class="hero__btn btn btn-secondary mx-lg-3" href="{% url 'login' %}">
+              Log in
+            </a>
+            {% endif %}
+
+
+          </div>
+        </div>
+
+        <div class="col-lg-5 mt-5 mt-lg-0 mx-0">
+            <p class="hero__paragraph mb-5">
+
+              We introduce many services related to the electrical, electronics and computer engineering.
+
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================== -->
+
+  <div id="product" class="block-5 space-between-blocks">
+    <div class="container">
+      <!-- HEADER -->
+      <div class="col-lg-8 col-xl-7 mx-auto text-center mb-5">
+        <!--p class="block__pre-title mb-2">Experiences</p-->
+        <h1 class="mb-3">Our <span class="highlight">Experiences</span></h1>
+        <p class="block__paragraph mb-0">
+          The services that can be introduced by the site.
+        </p>
+      </div>
+      <div class="row align-items-center flex-column-reverse flex-lg-row px-2">
+        <!-- LEFT CONTENT -->
+
+        <div class="col-lg-4">
+          <div class="card-2 d-flex flex-row flex-lg-row-reverse">
+            <div>
+              <span class="card-2__symbol mx-auto">
+                <i class="fas fa-chalkboard-teacher"></i>
+              </span>
+            </div>
+            <div class="px-2"></div>
+            <div>
+              <h3 class="card-2__title mb-2">Online Teaching</h3>
+              <p class="card-2__paragraph">
+                Teaching electrical circuits, Digital circuits, electronics and programming subjects.
+              </p>
+            </div>
+          </div>
+
+          <div class="card-2 d-flex flex-row flex-lg-row-reverse">
+            <div>
+              <span class="card-2__symbol mx-auto">
+                <i class="fas fa-wave-square"></i>
+              </span>
+            </div>
+            <div class="px-2"></div>
+            <div>
+              <h3 class="card-2__title mb-2">Solving Assignments and Labs</h3>
+              <p class="card-2__paragraph">
+                Solving assignments and labs related to electrical, electronics subjects and programming, using the simulation software such as (TinkerCad, OrCade-PSpice, Proteus, Multisim)
+              </p>
+            </div>
+          </div>
+
+          <div class="card-2 d-flex flex-row flex-lg-row-reverse">
+            <div>
+              <span class="card-2__symbol mx-auto">
+                <i class="fas fa-microchip"></i>
+              </span>
+            </div>
+            <div class="px-2"></div>
+            <div>
+              <h3 class="card-2__title mb-2">Projects</h3>
+              <p class="card-2__paragraph">
+                Projects using Arduino, Microcontrollers and PLCs, preparing the technical reports and presentations.
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- IMAGE -->
+        <div class="col-lg-4 my-5 text-center">
+          <!--img src="{% static 'images/middle.png' %}" class="w-75"-->
+        </div>
+
+
+        <!-- RIGHT CONTENT -->
+        <div class="col-lg-4">
+          <div class="card-2 d-flex">
+            <div>
+              <span class="card-2__symbol mx-auto">
+                <i class="fab fa-python"></i>
+              </span>
+            </div>
+            <div class="px-2"></div>
+            <div>
+              <h3 class="card-2__title mb-2">Python Programming</h3>
+              <p class="card-2__paragraph">
+                Give a full assistance in doing projects, solving assignments and tasks based on python programming language.
+              </p>
+            </div>
+          </div>
+          <div class="card-2 d-flex">
+            <div>
+              <span class="card-2__symbol mx-auto">
+                <i class="fas fa-brain"></i>
+              </span>
+            </div>
+            <div class="px-2"></div>
+            <div>
+              <h3 class="card-2__title mb-2">Data Science and Machine Learning</h3>
+              <p class="card-2__paragraph">
+                Give a full assistance in a data science  and ML projects based on python programming and the libraries (Pandas, Numpy, Matplotlib, seaborn, scikit learn, tensorflow, keras).
+              </p>
+            </div>
+          </div>
+
+          <div class="card-2 d-flex">
+            <div>
+              <span class="card-2__symbol mx-auto">
+                <i class="fas fa-laptop-code"></i>
+              </span>
+            </div>
+            <div class="px-2"></div>
+            <div>
+              <h3 class="card-2__title mb-2">Web and Desktop Apps</h3>
+              <p class="card-2__paragraph">
+                Building desktop applications based on libraries (Tkinter, Pyqt) and Web applications based on Django and Flask Frameworks.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================== -->
+
+  <div id="features" class="block-11 space-between-blocks">
+    <div class="container">
+      <!-- HEADER -->
+      <div class="block__header col-lg-8 col-xl-7 mx-auto text-center">
+        <!--p class="block__pre-title mb-2">GET MORE DETAILS</p-->
+        <h2 class="mb-3">More Details about <span class="highlight">The Technical Courses</span></h2>
+        <p class="block__paragraph mb-0">
+          The available technical courses related to the electrical, electronics engineering and programming.
+        </p>
+      </div>
+      <div class="row align-items-center justify-content-center flex-column-reverse flex-lg-row px-2">
+        <!--div class="col-lg-4 col-xl-5 p-lg-5">
+          <img class="w-100" src="{% static 'images/img-3.png' %}">
+        </div-->
+        <div class="col-lg-8 col-xl-10">
+          <div class="row">
+
+            <div class="col-md-6 mb-2-1rem">
+              <div class="card-1 card-1--selected text-center">
+                <span class="card-1__symbol mx-auto mb-4">
+                  <i class="fas fa-car-battery"></i>
+                </span>
+                <h3 class="card-1__title mb-2">Electrical Circuit Course</h3>
+                <p class="card-1__paragraph">
+                  This course cover all the basics and the fundamentals of the AC and DC electrical circuits.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-2-1rem">
+              <div class="card-1 text-center">
+                <span class="card-1__symbol mx-auto mb-4">
+                  <i class="fas fa-atom"></i>
+                </span>
+                <h3 class="card-1__title mb-2">Electronics Circuit Course</h3>
+                <p class="card-1__paragraph">
+                  This course cover all the basics and the fundamentals of the electronics circuits such as Diode, Transistors and the Op-Amp.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-2-1rem">
+              <div class="card-1 text-center">
+                <span class="card-1__symbol mx-auto mb-4">
+                  <i class="fas fa-wave-square"></i>
+                </span>
+                <h3 class="card-1__title mb-2">Digital Circuit Course</h3>
+                <p class="card-1__paragraph">
+                  This course cover all the basics and the fundamentals of the Digital circuits such as numbering system, Logic gates, Boolean algebra, Kmap, Flip Flops, Counters and Registers.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-2-1rem">
+              <div class="card-1 text-center">
+                <span class="card-1__symbol mx-auto mb-4">
+                  <i class="fab fa-python"></i>
+                </span>
+                <h3 class="card-1__title mb-2">Python Course</h3>
+                <p class="card-1__paragraph">
+                  This course cover all the basics and the fundamentals of the python programming language.
+                </p>
+              </div>
+            </div>
+
+
+            <div class="col-md-6 mb-2-1rem">
+              <div class="card-1 text-center">
+                <span class="card-1__symbol mx-auto mb-4">
+                  <i class="fab fa-cuttlefish"></i>
+                </span>
+                <h3 class="card-1__title mb-2">C Programming Course</h3>
+                <p class="card-1__paragraph">
+                  This course cover all the basics and the fundamentals of the C programming language.
+                </p>
+              </div>
+            </div>
+
+
+            <div class="col-md-6 mb-2-1rem">
+              <div class="card-1 text-center">
+                <span class="card-1__symbol mx-auto mb-4">
+                  <i class="fas fa-microchip"></i>
+                </span>
+                <h3 class="card-1__title mb-2">Arduino Course</h3>
+                <p class="card-1__paragraph">
+                  This course cover all the basics and the fundamentals of programming Arduino using C programming language.
+                </p>
+              </div>
+            </div>
+
+
+            <div class="col-md-6 mb-2-1rem">
+              <div class="card-1 text-center">
+                <span class="card-1__symbol mx-auto mb-4">
+                  <i class="fas fa-industry"></i>
+                </span>
+                <h3 class="card-1__title mb-2">PLC Course</h3>
+                <p class="card-1__paragraph">
+                  This course cover all the basics and the fundamentals of programming PLC using Ladder.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-2-1rem">
+              <div class="card-1 text-center">
+                <span class="card-1__symbol mx-auto mb-4">
+                  <i class="fab fa-css3-alt"></i>
+                </span>
+                <h3 class="card-1__title mb-2">Web Development</h3>
+                <p class="card-1__paragraph">
+                  This course cover all the details of building a web app using HTML,CSS, Javascript and using Django or Flask as a framework.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================== -->
+
+  <div id="testimonials" class="block-20 space-between-blocks">
+    <div class="container">
+      <div class="block__header col-lg-8 col-xl-7 mx-auto text-center px-0">
+        <h2 class="block__title mb-3">About the Owner</h2>
+      </div>
+      <div class="row px-2 pt-1">
+
+        <div class="col-lg-12">
+          <div class="testimonial-card-1 mb-5">
+            <p class="testimonial-card-1__paragraph mb-3">
+              Mohamed Yehia has Bs in Electronics and Communication Engineering from Suze Canal University, Egypt and years of experience as Instrument and Control Project engineer in electrical generation projects. He has tough experience in Construction and Commissioning as he involved in several control systems and has experience in PLC, DCS, SCADA and BMS.
+
+              He also has years of experience as a professional instructor and trainer for many subjects related to electrical engineering such as Electrical Circuits Analysis AC and DC , Electronics Circuit analysis, Digital Circuits , Microcontroller, Microprocessor, Arduino, C-programming and python programming.
+            </p>
+            <div class="block-20__person">
+              <div class="mb-2">
+                <img class="block-20__person-avatar" src="{% static 'images/me.png' %}">
+              </div>
+              <div class="flex-grow-1 d-flex flex-column">
+                <span class="block-20__person-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </span>
+                <span class="block-20__person-name my-1">Sr.Eng.Mohamed Yehia</span>
+                <span class="block-20__person-info"><a href="https://www.linkedin.com/in/mohamed-yehia-essa-8971b862/">LinkedIn.</a></span>
+              </div>
+            </div>
+            <span class="testimonial-card-1__quote-symbol">
+              <i class="fas fa-quote-left"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================== -->
+
+  <!--div id="pricing" class="block-17 px-4 space-between-blocks">
+    <div class="container">
+      <div class="block-17__header col-lg-8 col-xl-7 mx-auto text-center px-0">
+        <h1 class="block__title mb-3">PRICING</h1>
+        <p class="block__paragraph">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s
+          standard
+        </p>
+      </div>
+      <div class="block-17__card row flex-column-reverse flex-lg-row justify-content-center">
+        <div class="testimonial-card-3 text-center col-lg-6 px-0 d-flex align-items-center justify-content-center">
+          <div class="px-4 px-lg-5">
+            <img class="person__avatar" src="{% static 'images/profile-2.png' %}">
+            <p class="testimonial-card-3__paragraph my-4">
+              Lorem Ipsum is simply dummy text of the printing
+              and typesetting industry. Lorem Ipsum has been the
+              industry’s standard dummy text ever since the 1500s,
+              when an unknown printer took a galley of type and
+              scrambled it to make a type specimen book.
+            </p>
+            <div class="flex-grow-1 d-flex flex-column mb-3">
+              <span class="person__name">Ali Boukeroui</span>
+              <span class="person__info my-1">indiehackers.com</span>
+              <span class="person__rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </span>
+            </div>
+          </div>
+          <span class="testimonial-card-3__quote-symbol">
+            <i class="fas fa-quote-left"></i>
+          </span>
+        </div>
+        <div class="cta-card col-lg-5 px-0">
+          <div class="plan-card text-center">
+            <h6 class="plan-card__name mb-0">Free Shipping</h6>
+            <p class="discount mt-3 mb-0 d-flex align-items-center justify-content-center">
+              <span class="discount__old-price mx-2">$300</span>
+              <span class="discount__percentage mx-2">50% off</span>
+            </p>
+            <p class="plan-card__price my-2">$149</p>
+            <span class="plan-card__duration">90 Days Money Back Guarenteed</span>
+            <ul class="plan-features list-unstyled mt-5 mb-0">
+              <li class="plan-features__li">
+                <span class="plan-features__li-icon mx-1">
+                  <svg class="bi bi-check2-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                    <path fill-rule="evenodd"
+                      d="M8 2.5A5.5 5.5 0 1 0 13.5 8a.5.5 0 0 1 1 0 6.5 6.5 0 1 1-3.25-5.63.5.5 0 1 1-.5.865A5.472 5.472 0 0 0 8 2.5z" />
+                  </svg>
+                </span>
+                <span class="mx-3">The Watch</span>
+              </li>
+              <li class="plan-features__li">
+                <span class="plan-features__li-icon mx-1">
+                  <svg class="bi bi-check2-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                    <path fill-rule="evenodd"
+                      d="M8 2.5A5.5 5.5 0 1 0 13.5 8a.5.5 0 0 1 1 0 6.5 6.5 0 1 1-3.25-5.63.5.5 0 1 1-.5.865A5.472 5.472 0 0 0 8 2.5z" />
+                  </svg>
+                </span>
+                <span class="mx-3">+Bonus: Accessories</span>
+              </li>
+              <li class="plan-features__li">
+                <span class="plan-features__li-icon mx-1">
+                  <svg class="bi bi-check2-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                    <path fill-rule="evenodd"
+                      d="M8 2.5A5.5 5.5 0 1 0 13.5 8a.5.5 0 0 1 1 0 6.5 6.5 0 1 1-3.25-5.63.5.5 0 1 1-.5.865A5.472 5.472 0 0 0 8 2.5z" />
+                  </svg>
+                </span>
+                <span class="mx-3">Lifetime Mobile App</span>
+              </li>
+              <li class="mt-5">
+                <a href="#" class="d-block btn btn-primary px-5 mx-auto">
+                  Buy Now
+                </a>
+                <small class="d-block mt-2 text-center">208 Left. Discount ends after 2 weeks</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div-->
+
+  <!-- =================================== -->
+
+  <!--div id="faq" class="block-39 space-between-blocks">
+    <div class="container">
+      < HEADER>
+      <div class="col-lg-8 col-xl-7 mx-auto text-center mb-5">
+        <h1 class="block__title">Frequently Asked Questions</h1>
+      </div>
+      <div class="row px-2">
+        <div class="col-lg-6">
+          <div class="content-block">
+            <h4 class="content-block__title">
+              What caused that horrible financial crisis in 2008?
+            </h4>
+            <p class="content-block__paragraph">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry’s standard
+              dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+              type specimen
+              book.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="content-block">
+            <h4 class="content-block__title">
+              Why does Southwest only fly 737’s?
+            </h4>
+            <p class="content-block__paragraph">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry’s standard
+              dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+              type specimen
+              book.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="content-block">
+            <h4 class="content-block__title">
+              How are interest rates adjusted?
+            </h4>
+            <p class="content-block__paragraph">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry’s standard
+              dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+              type specimen
+              book.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="content-block">
+            <h4 class="content-block__title">
+              What’s up with the IMF bailing out all of these countries?
+            </h4>
+            <p class="content-block__paragraph">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry’s standard
+              dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+              type specimen
+              book.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div-->
+
+  <!-- =================================== -->
+
+  <div id="contact-us" class="block-28 space-between-blocks border-top border-bottom">
+    <div class="container">
+      <div class="row h-100">
+        <div class="col-lg-6 h-100 block-28__content-side">
+          <div class="contact-info">
+            <h5 class="contact-info__title mb-3">Get in Touch</h5>
+            <!--p class="contact-info__paragraph mb-5">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry’s standard
+              dummy text ever since the 1500s.
+            </p-->
+            <div class="mb-5">
+              <!--h6 class="contact-info__title-2 mb-3">COLLABORATE</h6-->
+              <p class="d-flex flex-column">
+                <h5 class="contact-info__item mb-3 fas fa-envelope"> ionicsplus@gmail.com</h5><br>
+                <h5 class="contact-info__item mb-3 fab fa-whatsapp"><a href="https://api.whatsapp.com/send?phone=96594964095"> +965-94964095</a></h5><br>
+                <h5 class="contact-info__item mb-2 fab fa-whatsapp"><a href="https://api.whatsapp.com/send?phone=201125724540"> +20-1125724540</a></h5>
+              </p>
+            </div>
+            <!--div class="mb-5">
+              <h6 class="contact-info__title-2 mb-3">COLLABORATE</h6>
+              <p class="d-flex flex-column">
+                <span class="contact-info__item mb-2">
+                  <i class="fas fa-phone"></i><span class="mx-2">Support@example.com</span>
+                </span>
+                <span class="contact-info__item">
+                  <i class="fas fa-envelope"></i><span class="mx-2">Fax: (099) 453-1357</span>
+                </span>
+              </p>
+            </div-->
+          </div>
+        </div>
+        <div class="col-lg-6 h-100 block-28__form-side">
+          <form method="POST" action="." class="contact-form text-center">
+            <div class="contact-form__header mb-5">
+              <h6 class="contact-form__title mb-3">Contact Us</h6>
+              <p class="contact-form__paragraph mb-0 mx-auto">
+                For any query please fill the below form and contact us 
+              </p>
+            </div>
+            <div class="contact-form text-left">
+            {% csrf_token %}
+            {{ form|crispy }}
+            </div>
+            <button class="btn btn-primary w-100">SEND MESSAGE</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================== -->
+
+  <!--div class="block-32 space-between-blocks">
+    <div class="container">
+      <HEADER>
+      <div class="col-lg-8 col-xl-7 mx-auto text-center mb-5">
+        <h1 class="block__title mb-3">Buy Now And Save 50%</h1>
+        <p class="block__paragraph mb-0">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s
+          standard
+        </p>
+      </div>
+      <div class="text-center">
+        <a href="#" class="btn btn-primary">Buy Now</a>
+      </div>
+    </div>
+  </div-->
+
+  <!-- =================================== -->
+
+  <div class="block-44 py-5">
+
+    <!--div class="container">
+      <div class="row px-0 mx-0 justify-content-center align-items-center">
+        <div class="block-44__logo-container">
+          <img class="block-44__logo" src="{% static 'images/my_logo_2.png' %}">
+        </div>
+        <ul class="block-44__list list-unstyled justify-content-center mb-0">
+          <li class="block-44__li-1">
+            <a href="#" class="block-44__link">Affiliate</a>
+          </li>
+          <li class="block-44__li-1">
+            <a href="#" class="block-44__link">Entreprise</a>
+          </li>
+          <li class="block-44__li-1">
+            <a href="#" class="block-44__link">Products</a>
+          </li>
+          <li class="block-44__li-1">
+            <a href="#" class="block-44__link">Account</a>
+          </li>
+        </ul>
+      </div>
+    </div-->
+
+    <hr class="block-44__divider">
+    <div class="container">
+      <div class="row flex-column flex-md-row px-2 justify-content-center">
+        <div class="flex-grow-1">
+          <ul class="block-44__extra-links d-flex list-unstyled p-0">
+
+            <li class="mx-2">
+              <a href="https://twitter.com/Elec_Eng_MYehia" class="block-44__link m-0">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+
+            <li class="mx-2">
+              <a href="https://www.instagram.com/electricalelectronics.engineer/" class="block-44__link m-0">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </li>
+
+            <li class="mx-2">
+              <a href="https://www.linkedin.com/in/mohamed-yehia-essa-8971b862/" class="block-44__link m-0">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </li>
+
+            <li class="mx-2">
+              <a href="https://www.facebook.com/PythonDeveloperMohamedYehia" class="block-44__link m-0">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+
+            <li class="mx-2">
+              <a href="https://www.youtube.com/channel/UCPrqqCjhqLyt1FZWWYgH-0Q" class="block-44__link m-0">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+        <p class="block-41__copyrights">&copy; 2021 IONICS Plus. All Rights Reserved.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================== -->
+
+  <script src="{% static 'js/app.js' %}"></script>
+
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

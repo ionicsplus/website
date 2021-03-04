@@ -1,0 +1,373 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+  <!-- font awesome 5 free -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <!-- Poppins font from Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+
+
+
+  <title>Edit</title>
+</head>
+
+<body>
+
+    <!--Offer Alert ================================ -->
+    <div class="offer-alert">
+       <div class="offer-alert__container container">
+         <span>IONICS <span class="highlight">Plus</span></span>
+       </div>
+     </div>
+
+  <!--Hero ====================================== -->
+  <header class="hero container-fluid border-bottom">
+    <nav class="hero-nav container px-4 px-lg-0 mx-auto">
+      <ul class="nav w-100 list-unstyled align-items-center p-0">
+        <li class="hero-nav__item">
+          <img class="hero-nav__logo" src="{% static 'images/my_logo_2.png' %}">
+        </li>
+
+
+        {% if user.is_authenticated %}
+
+        <li class="hero-nav__item">
+           <h6 class=" mb-0">Welcome back <span class="highlight">{{user_name}}</span></h6>
+        </li>
+
+        {% else %}
+
+        <li class="hero-nav__item">
+           <h6 class=" mb-0"><span class="highlight"></span></h6>
+        </li>
+
+        {% endif %}
+
+        <li id="" class="flex-grow-1 hero__nav-list hero__nav-list--mobile-menu ft-menu">
+          <ul class="hero__menu-content nav flex-column flex-lg-row ft-menu__slider animated list-unstyled p-2 p-lg-0">
+            <li class="flex-grow-1">
+                <li class="hero-nav__item">
+                  <a href="{% url 'mainapp' %}" class="hero-nav__link">Main</a>
+                </li>
+                <li class="hero-nav__item">
+                  <a href="{% url 'userpage' %}" class="hero-nav__link">My page</a>
+                </li>
+                <li class="hero-nav__item">
+                  <a href="{% url 'controlpage' %}" class="hero-nav__link">Admin</a>
+                </li>
+                <li class="hero-nav__item">
+                  <a href="{% url 'logout' %}" class="hero-nav__link">Sign out</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+
+  </header>
+
+  <!-- ===================================== -->
+
+  <!-- ===================================== -->
+
+  <!-- ===================================== -->
+
+  <!-- ===================================== -->
+
+  <!-- ===================================== -->
+
+  <!-- ===================================== -->
+
+  <div  class="block-11  border-top border-bottom">
+    <div class="container">
+      <div class="row h-100">
+
+
+        <div class="col-lg-12  h-100 block-28__form-side ">
+          <form enctype="multipart/form-data" method="POST" action="/update/{{objs.id}}" class="contact-form text-center">
+            {% csrf_token %}
+
+            <div class="contact-form__header mb-5">
+              <h6 class="contact-form__title mb-3">Edit page</h6>
+            <hr>
+            <table  class="contact-form__input" border="3">
+
+            	<tr style="color: #CC0803;">
+                <td>Id</td>
+                <td><input class="contact-form__input" type="text" name="id" value="{{objs.id}}" ></td>
+            	</tr>
+
+              <tr style="color: #CC0803;">
+                <td>Author</td>
+                <td><input class="contact-form__input" type="text" name="author" value="{{objs.author}}" ></td>
+              </tr>
+
+              <tr style="color: #CC0803;">
+                <td>Country</td>
+                <td><input class="contact-form__input" type="text" name="country" value="{{objs.country}}"></td>
+              </tr>
+
+              <tr style="color: #CC0803;">
+                <td>title</td>
+                <td><input class="contact-form__input" type="text" name="title" value="{{objs.title}}" ></td>
+              </tr>
+
+              <tr style="color: #CC0803;">
+                <td>Services</td>
+                <td><input  class="contact-form__input" type="text" name="services" value="{{objs.services}}" ></td>
+              </tr>
+
+              <tr style="color: #CC0803;">
+                <td>Subject</td>
+                <td><textarea class="contact-form__input" >{{objs.subject}}</textarea></td>
+              </tr>
+
+              <tr style="color: #CC0803;">
+                <td>Email</td>
+                <td><input  class="contact-form__input" type="email" name="Email" value="{{objs.email}}" ></td>
+              </tr>
+
+              <tr style="color: #CC0803;">
+                <td>WhatsApp</td>
+                <td><input  class="contact-form__input" type="number" name="whatsapp_number" value="{{objs.whatsapp_number}}" ></td>
+              </tr>
+
+
+              <tr style="color: #CC0803;">
+                <td>Created date</td>
+                <td><input  class="contact-form__input" type="text" name="created" value="{{objs.created}}" ></td>
+              </tr>
+
+              <tr style="color: #CC0803;">
+                <td>Delivery date</td>
+                <td><input  class="contact-form__input" type="text" name="delivery_date" value="{{objs.delivery_date}}" ></td>
+              </tr>
+
+              {% if objs.file1  %}
+
+              <tr style="color: #CC0803;">
+                <td>File1</td>
+                <td><a href='{{ objs.file1.url }}'>{{ objs.file1 }}</a></td>
+              </tr>
+
+              {% endif %}
+
+
+              {% if objs.file2  %}
+
+              <tr style="color: #CC0803;">
+                <td>File2</td>
+                <td><a href='{{ objs.file2.url }}'>{{ objs.file2 }}</a></td>
+              </tr>
+
+              {% endif %}
+
+              {% if objs.file3  %}
+
+              <tr style="color: #CC0803;">
+                <td>File3</td>
+                <td><a href='{{ objs.file3.url }}'>{{ objs.file3 }}</a></td>
+              </tr>
+
+              {% endif %}
+
+
+              <tr style="color: black;">
+                <td>Solved/Rejected</td>
+                <td><input  class="contact-form__input" type="text" name="solving" value="{{objs.solving}}"></td>
+              </tr>
+
+              <tr style="color: #CC0803;">
+                <td>Rejected</td>
+                <td><input  class="contact-form__input" type="text" name="rejected" value="{{objs.rejected}}"></td>
+              </tr>
+
+              <tr style="color: green;">
+                <td><b>Accepted</b></td>
+                <td><input  class="contact-form__input" type="text" name="accepted" value="{{objs.accepted}}"></td>
+              </tr>
+
+              <tr style="color: #CC0803;">
+                <td>In progress</td>
+                <td><input  class="contact-form__input" type="text" name="in_progress" value="{{objs.in_progress}}"></td>
+              </tr>
+
+              <tr style="color: #CC0803;">
+                <td>Finished</td>
+                <td><input  class="contact-form__input" type="text" name="finished" value="{{objs.finished}}"></td>
+              </tr>
+
+              <tr style="color: green;">
+                <td><b>Price</b></td>
+                <td><input  class="contact-form__input" type="text" name="Price" value="{{objs.Price}}"></td>
+              </tr>
+
+              <tr style="color: #CC0803;">
+                <td>Solution File1</td>
+                <td><input  class="contact-form__input" type="file" name="solution_file_1" value="{{objs.solution_file_1}}">
+
+                {% if objs.solution_file_1  %}
+
+                <a href='{{ objs.solution_file_1.url }}'>{{ objs.solution_file_1}}</a>
+
+                {% endif %}
+
+                </td>
+              </tr>
+
+
+
+              <tr style="color: #CC0803;">
+                <td>Solution File2</td>
+                <td><input  class="contact-form__input" type="file" name="solution_file_2" value="{{objs.solution_file_2}}">
+
+                {% if objs.solution_file_2  %}
+
+                <a href='{{ objs.solution_file_2.url }}'>{{ objs.solution_file_2}}</a>
+
+                {% endif %}
+
+                </td>
+              </tr>
+
+              <tr style="color: #CC0803;">
+                <td>Solution File3</td>
+                <td><input  class="contact-form__input" type="file" name="solution_file_3" value="{{objs.solution_file_3}}">
+
+                {% if objs.solution_file_3  %}
+
+                <a href='{{ objs.solution_file_3.url }}'>{{ objs.solution_file_3}}</a>
+
+                {% endif %}
+
+                </td>
+              </tr>
+
+
+              <tr style="color: #CC0803;">
+                <td>Payment link Knet</td>
+                <td><input  class="contact-form__input" type="text" name="payment_link_Knet" value="{{objs.payment_link_Knet}}" ></td>
+              </tr>
+
+              <tr style="color: #CC0803;">
+                <td>Payment link Visa</td>
+                <td><input  class="contact-form__input" type="text" name="payment_link_visa" value="{{objs.payment_link_visa}}" ></td>
+              </tr>
+
+
+
+              <tr style="color: #CC0803;">
+                <td>Payment</td>
+                <td>
+
+                {% if objs.payment_file  %}
+
+                <a href='{{ objs.payment_file.url }}'>{{ objs.payment_file}}</a>
+
+                {% endif %}
+
+                </td>
+              </tr>
+
+              </div>
+
+            </table>
+            <br>
+            <input class="btn btn-primary w-50 mb-3" type="submit" name="Update" >
+            
+            {% if messages %}
+
+            {% for mess in messages %}
+
+            <h5 style="color: #CC0803;">{{mess}}</h5>
+
+            {% endfor %}
+
+            {% endif %}
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================== -->
+
+
+  <!-- =================================== -->
+
+  <div class="block-44 py-5">
+    <hr class="block-44__divider">
+    <div class="container">
+      <div class="row flex-column flex-md-row px-2 justify-content-center">
+        <div class="flex-grow-1">
+          <ul class="block-44__extra-links d-flex list-unstyled p-0">
+
+            <li class="mx-2">
+              <a href="https://twitter.com/Elec_Eng_MYehia" class="block-44__link m-0">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+
+            <li class="mx-2">
+              <a href="https://www.instagram.com/electricalelectronics.engineer/" class="block-44__link m-0">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </li>
+
+            <li class="mx-2">
+              <a href="https://www.linkedin.com/in/mohamed-yehia-essa-8971b862/" class="block-44__link m-0">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </li>
+
+            <li class="mx-2">
+              <a href="https://www.facebook.com/PythonDeveloperMohamedYehia" class="block-44__link m-0">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+
+            <li class="mx-2">
+              <a href="https://www.youtube.com/channel/UCPrqqCjhqLyt1FZWWYgH-0Q" class="block-44__link m-0">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+        <p class="block-41__copyrights">&copy; 2021 IONICS Plus. All Rights Reserved.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================== -->
+
+  <script src="{% static 'js/app.js' %}"></script>
+
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
